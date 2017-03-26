@@ -1,0 +1,29 @@
+{
+  "name": "smokerpi",
+  "version": "0.0.0",
+  "description": "smokerpi frontend",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danielsbonnin/smokerpi_frontend.git"
+  },
+  "keywords": [
+    "raspberry",
+    "pi",
+    "smoker",
+    "iot",
+    "file",
+    "cabinet"
+  ],
+  "author": "Daniel Bonnin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/danielsbonnin/smokerpi_frontend/issues"
+  },
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}
