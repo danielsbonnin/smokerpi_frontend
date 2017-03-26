@@ -2,6 +2,8 @@
 <html>
 
 <head>  
+    <script type="text/javascript" src="canvasjs.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script type="text/javascript">
     window.onload = function () {
         var chart = new CanvasJS.Chart("chartContainer",
@@ -15,7 +17,7 @@
             axisX:{
                 gridColor: "Silver",
                 tickColor: "silver",
-                valueFormatString: "DD/MMM"
+                valueFormatString: "hh:mm"
 
             },                        
                         toolTip:{
@@ -38,7 +40,7 @@
                 name: "temp in F",
                 markerType: "square",
                 color: "#F08080",
-                dataPoints: [
+                dataPoints: [/*
                 { x: new Date(2010,0,3), y: 650 },
                 { x: new Date(2010,0,5), y: 700 },
                 { x: new Date(2010,0,7), y: 710 },
@@ -50,31 +52,8 @@
                 { x: new Date(2010,0,19), y: 869 },
                 { x: new Date(2010,0,21), y: 943 },
                 { x: new Date(2010,0,23), y: 970 }
-                ]
-            },
-            {        
-                type: "line",
-                showInLegend: true,
-                name: "Unique Visits",
-                color: "#20B2AA",
-                lineThickness: 2,
-
-                dataPoints: [
-                { x: new Date(2010,0,3), y: 510 },
-                { x: new Date(2010,0,5), y: 560 },
-                { x: new Date(2010,0,7), y: 540 },
-                { x: new Date(2010,0,9), y: 558 },
-                { x: new Date(2010,0,11), y: 544 },
-                { x: new Date(2010,0,13), y: 693 },
-                { x: new Date(2010,0,15), y: 657 },
-                { x: new Date(2010,0,17), y: 663 },
-                { x: new Date(2010,0,19), y: 639 },
-                { x: new Date(2010,0,21), y: 673 },
-                { x: new Date(2010,0,23), y: 660 }
-                ]
+                */]
             }
-
-            
             ],
           legend:{
             cursor:"pointer",
@@ -89,23 +68,26 @@
             }
           }
         });
-btn = document.getElementById("add");
-var day = 23;
-btn.addEventListener("click", function(){
-    day++;
-    
-    chart.data[0].dataPoints.push({x: new Date(2010, 0, day), y: 0});
-    chart.render();
-});
-chart.render();
-}
+
+        chart.render();
+        var socket = io();
+        socket.on('newTemp', function(msg){
+            //chart.data[0].dataPoints.push({x: new Date(2010, 0, day), y: 0});
+            chart.render();
+        });
+        socket.on('tempData', function(data){
+            
+            data.x = new Date(data.x);
+            console.log(JSON.stringify(data));
+            chart.data[0].dataPoints.push(data);
+            chart.render();
+        });
+    };
 
 </script>
-<script type="text/javascript" src="canvasjs.min.js"></script>
+
 </head>
 <body>
-    <h1>title</h1>
-    <button id="add">Add a zero</button>
     <div id="chartContainer" style="height: 300px; width: 100%;">
     </div>
 </body>

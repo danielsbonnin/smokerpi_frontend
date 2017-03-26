@@ -24,6 +24,7 @@
     "url": "https://github.com/danielsbonnin/smokerpi_frontend/issues"
   },
   "dependencies": {
+    "child_process": "^1.0.2",
     "express": "^4.15.2",
     "socket.io": "^1.7.3"
   }
