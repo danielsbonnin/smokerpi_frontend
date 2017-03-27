@@ -11,6 +11,7 @@ class Thermometer:
         self.f = -500
         self.c = -500
         self.read_temp()
+    
     def temp_raw(self):
         f = open(self.temp_sensor, 'r')
         lines = f.readlines()
@@ -43,6 +44,7 @@ class Thermometer:
             t = threading.Thread(target=self.read_temp)
             t.start()
         return self.c
+    
     def read_continuous(self):
         while True:
             self.read_temp()

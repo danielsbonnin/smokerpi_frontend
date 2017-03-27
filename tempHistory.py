@@ -5,8 +5,14 @@ import thermometer
 from datetime import datetime
 
 t = thermometer.Thermometer()
+temps = []
+def get_latest():
+    json.dumps(temps.pop())
+
+def get_history():
+    return json.dumps(temps)
 
 while True:
-    print(json.dumps({'x':datetime.now().isoformat(), 'y': t.get_f()}))
+    temps.append({'x':datetime.now().isoformat(), 'y': tempHistory.get_latest()})
     time.sleep(2)
     sys.stdout.flush()
