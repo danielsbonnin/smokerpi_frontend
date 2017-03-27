@@ -13,6 +13,5 @@ def get_history():
     return json.dumps(temps)
 
 while True:
-    temps.append({'x':datetime.now().isoformat(), 'y': tempHistory.get_latest()})
+    temps.append({'x':datetime.now().isoformat(), 'y': t.get_f()})
     time.sleep(2)
-    sys.stdout.flush()
